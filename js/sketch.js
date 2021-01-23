@@ -16,14 +16,14 @@ function setup() {
   angleMode(DEGREES);
   colorMode(HSB, 100);
   background(0);
-  /*for(let i = 0 ; i < paritcle_count ; i++){
+  for(let i = 0 ; i < paritcle_count ; i++){
     particles[i] = new particle_circle(new createVector(0,0),0,0,0);
-  }*/
+  }
 }
 
 function draw() {
   
-  // background(0);
+  background(0);
   current_time += 0.014;
   if(time > 90){
     n= 0;
@@ -33,7 +33,7 @@ function draw() {
     time = 0;
     m_radius_start--;
   }
-  for(let i = 0 ; i< 50;i++){
+  for(let i = 0 ; i< 20;i++){
     let theta = n*const_angle;
     let r = c*sqrt(n);
     let x = cos(theta);
@@ -46,25 +46,24 @@ function draw() {
     let light_v = createVector(cos(vector_rotation), sin(vector_rotation));
     let point_v = p.copy();
     let dotProdut = light_v.dot(point_v.normalize());
-    
-    stroke(dotProdut*100,alpha*map(m_radius,10,100,1,0.6));
-    strokeWeight(10*map(m_radius,10,100,1,0.4));
-    ellipse(p.x,p.y,m_radius,m_radius);
-    // particles[id] = new particle_circle(p,dotProdut*100,alpha,m_radius);
+    // stroke(dotProdut*100,alpha);
+    // strokeWeight(2);
+    // ellipse(p.x,p.y,m_radius,m_radius);
+    particles[id] = new particle_circle(p,dotProdut*100,alpha,m_radius);
     n++;
     id++;
     const_angle += 0.00008; //0.00008
-    m_radius += 0.1;
+    m_radius += 0.08;
     vector_rotation+= sin(current_time*2);
     
     console.log(dotProdut);
   }
   alpha += 0.4;
   time++;
-  /*for(let i = 0 ; i < paritcle_count ; i++){
+  for(let i = 0 ; i < paritcle_count ; i++){
     particles[i].disapear();
     particles[i].show();
-  }*/
+  }
   if(id >= paritcle_count){
     id=0;
   }
